@@ -1,0 +1,19 @@
+\medskip
+\leftline {{\ssb NAME} (PRINT): \underbar{\hbox to 4.0in{\hfill}}}
+\centerline {\sans Last, First, MI}
+\medskip
+\hrule
+\hrule
+\hrule  
+\bigskip
+ 
+\parindent 0.1in
+\par The scores for this exam will be posted via Canvas e-learning.
+ 
+\bigskip 
+\par As you turn in your exam, tear off this page and save it for future
+reference. Should you have any questions, this page MUST be brought with you as a means of identification.
+\vfill
+\eject 
+\centerline {}
+\eject

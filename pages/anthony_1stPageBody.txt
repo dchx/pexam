@@ -1,0 +1,31 @@
+\medskip
+\leftline {{\ssb NAME} (PRINT): \underbar{\hbox to 4.0in{\hfill}}}
+\centerline {\sans Last, First, MI}
+\medskip
+\hrule
+\hrule
+\hrule  
+\bigskip
+ 
+\parindent 0.1in
+\par The scores for this exam may be posted on the webpage of your instructor.
+ 
+ 
+\parindent 0.1in 
+\par Due to student privacy laws, the scores will be posted by the five
+digit code found in the upper left corner of each page. Each exam has a
+UNIQUE code number.  However, other Astronomy sections use this exam format
+and may use the same exam code numbers. IT IS THEREFORE IMPORTANT THAT
+YOU MAKE SURE THAT THE SCORE YOU READ BELONGS TO YOU. The instructor's name
+and the exam number will be clearly marked on each exam score listing.
+\bigskip 
+\par As you turn in your exam, tear off this page and save it for future
+reference.  It will aid you in finding your score when the exam scores
+are posted.  Also, should you have any questions about the exam after it is
+graded, the loss of this page will make it difficult to find your exam and
+delay possible ( but unlikely ) changes to your grade.  Should you have any
+questions, this page MUST be brought with you as a means of identification.
+\vfill
+\eject 
+\centerline {}
+\eject

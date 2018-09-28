@@ -1,0 +1,374 @@
+QQ Calculating the density of a sphere of material
+requires the volume which will involve the diameter of 
+that sphere raised to the what power?
+AA 1 (1) 3rd (2) 2nd (3) 1st (4) 0th (5) 4th
+
+QQ Which of the following statements does not use the
+term angular size or angular distance correctly?
+AA S 1 (1)  The angular distance between those two bright
+stars in the sky is about 2 meters.
+(2)  The angular distance between those two houses in the
+distance is 10 degrees.
+(3)  The angular size of the Sun is about the same as that
+of the Moon.
+(4)  The angular size of the Moon is about 1/2 degree.
+(5)  You can use your outstretched hand to estimate
+angular sizes and angular distances.
+
+QQ How many arcseconds are in 1 degree?
+AA S 1 (1)  3,600 (2)  360 (3)  100 (4) 10,000 (5) 60
+
+QQ Which number from the listed below was obtained from 
+astronomical observations rather than an arbitrary human 
+definition? 
+AA S 1 (1) a year contains 365 days 
+(2) a century contains 100 years 
+(3) a circle contains 360 degrees 
+(4) an hour contains 60 minutes 
+(5) a day contains 24 hours 
+
+QQ Polaris will not always be directly over the north pole
+of the Earth because of 
+AA S 1 (1) precession. (2) ellipses. (3) eclipses (4) dark
+matter. (5) proper motion.
+
+QQ The shift in direction to a nearby object that we see
+when we look first with one eye and then with the other eye
+is called 
+AA S 1 (1) parallax (2) precession (3) angular distance 
+(4) angular size (5) none of the other four answers
+
+QQ Which of the following has your "address" in the
+correct order?
+AA S 1 (1)  you, Earth, solar system, Milky Way, 
+Local Group, Local Supercluster
+(2)  you, Earth, Local Group, Local Supercluster, solar
+system, Milky Way
+(3)  you, Earth, solar system, Local Group, Milky Way, Local
+Supercluster
+(4)  you, Earth, solar system, Milky Way, Local
+Supercluster, Local Group 
+(5)  you, Earth, solar system, Local Group, Local
+Supercluster, Milky Way
+
+QQ Which of the following best describes what we mean by the universe? 
+AA S 1 (1) the sum total of all matter and energy 
+(2) a vast collection of stars that number as many as the grains of 
+sand on all the beaches on Earth 
+(3) all the galaxies in all the superclusters 
+(4) the universe is another name for our Milky Way Galaxy 
+(5) everything that can be seen with telescopes
+
+QQ Which of the following statements does not use the
+term light-year in an appropriate way?
+AA S 1 (1)  It will take me light-years to complete this
+homework assignment.
+(2)  A light-year is about 10 trillion kilometers.
+(3)  The Milky Way Galaxy is about 100,000 light-years in
+diameter.
+(4)  It will take the Voyager spacecraft about 20,000
+years to travel just 1 light-year.
+(5)  It's about 4 light-years from here to Alpha Centauri.
+
+QQ Which of the following is largest?
+AA S 1 (1)  size of a typical galaxy
+(2)  1 light-year
+(3)  distance to the nearest star (other than our Sun)
+(4)  size of Pluto's orbit
+(5)  typical distance to a comet
+
+QQ Why is it summer in the Northern Hemisphere when it is
+winter in  the Southern Hemisphere?
+AA S 1 (1)  The Northern Hemisphere is tilted toward the
+Sun and receives more direct sunlight.
+(2)  The Northern Hemisphere is "on top" of the Earth and
+therefore receives more sunlight.
+(3)  The Northern Hemisphere is closer to the Sun than the
+Southern Hemisphere.
+(4)  The Northern Hemisphere is tilted away from the Sun
+and receives more indirect sunlight.
+(5)  It isn't: both hemispheres have the same seasons at
+the same time.
+
+QQ Which of the following statements about the celestial
+sphere is not true?
+AA S 1 (1)  The "celestial sphere" is just another name
+for our universe.
+(2)  The celestial sphere does not exist physically.
+(3)  When we look in the sky, the stars all appear as though
+they are located on the celestial sphere.
+(4)  The Earth is placed at the center of the celestial
+sphere.
+(5)  From any location on Earth, we can see only half the
+celestial sphere at any one time.
+
+QQ What is a circumpolar star?
+AA S 1 (1)  a star that always remains above your 
+horizon or always below your horizon
+(2)  a star that is visible from the Arctic or Antarctic
+circles
+(3)  a star that is close to the north celestial pole
+(4)  a star that is close to the south celestial pole
+(5)  a star that makes a daily circle around the celestial
+sphere
+
+QQ What makes the North Star, Polaris, special?
+AA S 1 (1)  It currently appears very near the north 
+celestial pole.
+(2)  It is the star directly on your northern horizon.
+(3)  It is the brightest star in the sky.
+(4)  It is the star straight overhead.
+(5)  It can be used to determine your longitude on Earth.
+
+QQ What is the ecliptic?
+AA S 1 (1)  the Sun's apparent path around the celestial
+sphere
+(2)  the Moon's apparent path along the celestial sphere
+(3)  when the Moon passes in front of the Sun
+(4)  the constellations commonly used in astrology to
+predict the future
+(5)  the Sun's daily path across the sky
+
+QQ Why were ancient peoples unable to detect stellar
+parallax?
+AA S 1 (1)  They did not have the ability to measure very
+small angles.
+(2)  They could not see distant stars.
+(3)  They did not look for it.
+(4)  They did not observe for long enough periods of time.
+(5)  They did detect it, but they rejected the observations.
+
+QQ If the Moon is setting at sunrise the phase of the
+Moon must be
+AA S 1 (1)  full.
+(2)  third quarter.
+(3)  first quarter.
+(4)  new.
+(5)  waning crescent.
+
+QQ Why do we see essentially the same face of the Moon at
+all times?
+AA S 1 (1)  because the Moon's periods of rotation and
+revolution (orit) are equal
+(2)  because the Moon does not rotate
+(3)  because the other face points toward us only at new
+moon, when we can't see the Moon
+(4)  because the Sun only illuminates one half at a time
+(5)  because the Moon has a nearly circular orbit around
+the Earth
+
+QQ What effect or effects would be most significant if
+the Moon's orbital plane were exactly the same as the 
+ecliptic plane?
+(A)  Solar eclipses would be much more frequent.
+(B)  Solar eclipses would be much rarer.
+(C)  Solar eclipses would last a much shorter time.
+AA 1 (1)  A  (2)  B (3)  C (4)  Both A and C. (5)  Both B
+and C.
+
+QQ The astrology practiced by those who cast predictive
+horoscopes can be scientifically tested by 
+AA S 1 (1) comparing how often the predictions come true
+to what would be expected by pure chance.
+(2) asking astrologers if it works.
+(3) polling people to find out what percentage believe
+their horoscopes  to be accurate.
+(4) counting how many times the predictions come true.
+(5) asking how many famous people believe in astrology.
+
+QQ If Eratosthenes were to have mistakenly measured the
+zenith angle to be 14 degrees rather than the 7 degrees 
+it was at Alexandria, he would have concluded that the 
+Earth was 
+AA S 1 (1) smaller in diameter.
+(2) much farther from the Sun
+(3) spinning faster.
+(4) larger in diameter.
+(5) much nearer the sun.
+
+QQ Which of the following statements about scientific
+models is best?
+AA S 1 (1)  A model can be used to explain and predict
+real phenomena.
+(2)  A model tries to represent only one aspect of nature.
+(3)  A model tries to represent all aspects of nature.
+(4)  All models that explain nature well are correct.
+(5)  All current models are correct.
+
+QQ How did the Ptolemaic model explain the apparent
+retrograde motion of the planets?
+AA S 1 (1)  It held that the planets moved along small
+circles that moved on larger circles around the Earth.
+(2)  It placed the Sun at the center so that the planets'
+apparent retrograde motion was seen as the Earth passed 
+each one in its orbit.
+(3)  It varied the motion of the celestial sphere so that
+it sometimes moved backward.
+(4)  It held that the planets moved along small circles
+that moved on larger circles around the Sun.
+(5)  It held that sometimes the planets moved backward
+along their circular orbits.
+
+QQ The internationally favored unit to measure energy is
+the 
+AA S 1 (1) joule. (2) Calorie. (3) British thermal unit. 
+(4) kilowatt-hour. (5) erg-minute.
+
+QQ Which of the following has the greatest kinetic energy? 
+AA S 1 (1) the Space Shuttle orbiting at 17,000 mph with
+rockets off.
+(2) the Space Shuttle gliding without engines at 300 mph
+(3) the Space Shuttle one hour before launch, perched 10
+meters off the ground, attached to its launch rocket.
+(4) the Space Shuttle launching at 1,000 mph with rockets
+at full throttle.
+(5) the Space Shuttle re-entering the Earth's atmosphere
+and glowing red hot.
+
+QQ Absolute zero is
+AA S 1 (1)  0 Kelvins.
+(2)  0 degrees  Celsius.
+(3)  0 degrees Fahrenheit.
+(4)  32 degrees  Fahrenheit.
+(5)  273 degrees Celsius.
+
+QQ Suppose you heat up an oven to 350 degrees F and boil 
+a pot of water. Which of the following explains why you 
+would be burned by sticking your hand briefly in the pot 
+but not by sticking your hand briefly in the oven?
+AA S 1 (1)  The water has a higher heat content than the
+oven.
+(2)  The water has a higher temperature than the oven.
+(3)  The oven has a higher heat content than the water.
+(4)  The molecules in the water are moving faster than the
+molecules in the oven.
+(5)  The oven has a higher temperature than the water.
+
+QQ Considering Einstein's famous equation, E = mc**2, which
+of the following statements is true?
+AA S 1 (1)  A small amount of mass can be turned into a
+large amount of energy.
+(2)  It takes a large amount of mass to produce a small
+amount of energy.
+(3)  Mass can be turned into energy, but energy cannot
+be turned back into mass.
+(4)  You can make mass into energy if you can accelerate the
+mass to the speed of light.
+(5)  One kilogram of mass represents 1 joule of energy.
+
+QQ The difference between speed and velocity is that 
+AA S 1 (1) a direction is needed to specify the velocity,
+whereas the speed only requires the magnitude of the rate of
+change of the position of the particle. 
+(2) velocity is the same as acceleration whereas speed is
+different. 
+(3) they are expressed in different units.
+(4) There is no difference between velocity and speed.
+(5) velocity is calculated using a physics equation.
+
+QQ An astronomical unit is the distance 
+AA S 1 (1) between the Earth and our Sun on average. 
+(2) to the nearest star.
+(3) across our galaxy. 
+(4) light travels in one year. 
+(5) between the Sun and any planet.
+
+QQ Which of the following is an example in which you are
+traveling at constant speed but not at constant velocity?
+AA S 1 (1)  driving around in a circle at exactly 100 km/hr
+(2)  driving backward at exactly 50 km/hr
+(3)  rolling freely down a hill in a cart, traveling in a
+straight line
+(4)  jumping up and down, with a period of exactly 60 hops
+per minute
+(5)  None of the above.
+
+QQ If you drop a rock from a great height, about how fast
+will it be falling after 5 seconds, neglecting air
+resistance?
+AA S 1 (1)  50 meters per second
+(2)  It depends on what shape it is.
+(3)  10 meters per second
+(4)  15 meters per second
+(5)  It depends on how heavy it is.
+
+QQ If your mass is 60 kg on Earth, what would your mass
+be on the Moon?
+AA S 1 (1)  60 kg (2) 10 kg (3) 50 kg (4) 10 lb (5) 60 lb
+
+QQ Suppose an object is moving in a straight line at 50
+miles per hr. According to Newton's first law of motion, 
+the object will
+AA S 1 (1)  continue to move in the same way until it is
+acted upon by a force.
+(2)  continue to move in the same way forever, no matter
+what happens.
+(3)  eventually slow down and come to a stop.
+(4)  continue to move in a straight line forever if it is
+in space, but fall to the ground if it is on Earth.
+(5) continue to move in a straight line if there is no air
+resistance.
+
+QQ Which of the following statements is not one of
+Newton's laws of motion?
+AA S 1 (1)  What goes up must come down.
+(2)  The rate of change of momentum of an object is equal
+to the net force applied to the object.
+(3)  In the absence of a net force, an object moves with
+constant velocity.
+(4)  For any force, there always is an equal and opposite
+reaction force.
+(5)  All of the other four are Newton's laws of motion.
+
+QQ A skater can spin faster by pulling in her arms closer
+to her body or spin slower by spreading her arms out from
+her
+body. This is due to
+AA S 1 (1)  conservation of angular momentum.
+(2)  Newton's third law.
+(3)  conservation of momentum.
+(4)  the law of gravity.
+(5)  conservation of energy.
+
+QQ Kepler's third law, p**2 = a**3, means that
+AA S 1 (1)  All of the other four answers are correct.
+(2)  all orbits with the same semimajor axis have the same
+period.
+(3)  the period of a planet does not depend on its mass.
+(4)  planets that are farther from the Sun move at slower
+average speeds than nearer planets.
+(5)  a planet's period does not depend on the eccentricity
+of its orbit.
+
+QQ A contribution of Galileo to our knowledge of physics
+and astronomy was
+AA S 1 (1) all of the other four answers
+(2) observing sunspots
+(3) discovering the moons of Jupiter
+(4) observing that Venus goes through a full range of phases
+(5) observing the Milky Way was made of stars
+
+QQ The force of gravity is an inverse square law. This
+means that, if you double the distance between two large 
+masses, the gravitational force between them
+AA S 1 (1)  weakens by a factor of 4.
+(2)  strengthens by a factor of 4.
+(3)  also doubles.
+(4)  weakens by a factor of 2.
+(5)  is unaffected.
+
+QQ Which of the following best describes the origin of
+ocean tides on Earth?
+AA S 1 (1)  Tides are caused by the difference in the
+force of gravity exerted by the Moon across the sphere of 
+the Earth.
+(2)  The Moon's gravity pulls harder on water than on
+land, because water is less dense than rock.
+(3)  Tides are caused by the 23 1/2 degree tilt of the
+Earth's rotational axis to the ecliptic plane.
+(4)  Tides are caused primarily by the gravitational force
+of the Sun.
+(5)  Tides are caused on the side of the Earth nearest the
+Moon because the Moon's gravity attracts the water.
+
+

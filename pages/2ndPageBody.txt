@@ -1,0 +1,55 @@
+\bigskip 
+\hbox to \hsize{{\ssb NAME} (PRINT): \underbar{\hbox to
+2.0in{\hfill}} \hfill 
+SIGNATURE: \underbar{\hbox to 1.1in{\hfill}}}
+  
+\centerline {\sans Last,First,MI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\medskip
+\hrule
+\hrule   
+\bigskip 
+\centerline {``On my honor, I have neither given nor received unauthorized aid
+ on this examination.''}
+\centerline {My signature above indicates my compliance with this statement.}
+\bigskip 
+\hrule
+\hrule
+\medskip
+ 
+\centerline{\sans DIRECTIONS:}
+\medskip 
+ 
+\item {\bf (1)} Print name on this page and sign it also  (NO NAME = NO SCORE).
+\item {\bf (2)} Code on the Answer Sheet:  (IF INCORRECT, SCORE = ZERO)
+\medskip
+\itemitem {\bf A.} Name, UFID No., \& Section No. (PROOF THIS 
+VERY CAREFULLY).
+\itemitem {\bf B.} Test Number -- See the top of your exam pages.
+\smallskip 
+\centerline {(Use spaces 76-80 on answer sheet for this 5-digit
+number.)}
+\smallskip
+\item {\bf (3)} Use a Black No. 2 pencil to record answers -- Do not use ink.
+ \smallskip
+\centerline {(ONLY ANSWERS RECORDED ON ANSWER SHEETS WILL BE SCORED.)}
+\smallskip 
+\item {\bf (4)} Answer ALL questions -- ONE answer is correct per question.
+ \smallskip
+\centerline {(Scoring formula = number of correct answers -- DO NOT LEAVE 
+BLANKS.)}
+\smallskip 
+\item {\bf (5)} Use margins or back of exam question pages for all scratch work.
+\item {\bf (6)} Turn in all exam materials at the end of exam, INCLUDING 
+THE EXAM QUESTION SHEETS.  Put figure sheets (if provided with the exam) 
+inside the question sheets. Hand in Green Answer Key SEPARATELY.
+\smallskip 
+\medskip 
+\centerline {\bf $>>>>>$ BEFORE YOU TURN IN YOUR EXAM $<<<<<$}
+\centerline {Have your student I.D. ready.}
+\centerline {Show the EXAM to the Proctor so she/he can check the exam code.}
+\medskip 
+\par {\sans  {\bf NOTE:} The answer ``NVA'' found in some questions means
+ ``NOT A VALID ANSWER''. If you give this response, you may consider that
+ question will be graded automatically WRONG on your test. }
+\medskip 
+
