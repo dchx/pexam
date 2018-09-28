@@ -6,7 +6,7 @@ path='/depot/exam/'
 def load_pars():
 # identify input parameter file
 	args=sys.argv
-	defaultinfile=path+"dcx_scratch/src/input.py"
+	defaultinfile=path+"dcx_scratch/pars/input.py"
 	if len(args)==1:
 		infile=raw_input("Please enter input parameter file (Default: "+defaultinfile+"): ")
 		if len(infile)==0: infile=defaultinfile
