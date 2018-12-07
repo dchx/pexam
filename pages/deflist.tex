@@ -1,0 +1,23 @@
+\magnification=1200
+\nopagenumbers
+\input epsf
+\epsfverbosetrue
+\font\ssb=cmssdc10
+\font\kp=cmcsc10
+\font\bb=cmssi17
+\font\br=cmb10
+\font\sans=cmss10
+\def\eol{\hfill\break\null }
+\def\bct{
+	\begingroup
+	\obeylines\obeyspaces
+	\tt}
+\def\ect{\endgroup}
+
+%%%TO MAKE ALL EXAMS AN EVEN NUMBER OF PAGES%%%
+
+\def\evenpages{\vfill\eject
+
+\ifodd\count0\relax\else\vfill\eject%
+
+\headline{\phantom{print something}\hfill }\ \fi }

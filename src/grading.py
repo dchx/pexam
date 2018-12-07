@@ -8,11 +8,11 @@ def grade_result_mail(filebase,pars):
 	Please check the grading results for %s exam %s.\n
 	I have put the exam questions and scantrons in your mailbox.\n
 	Thanks,
-	Chenxing'''%(instructor.split()[1],pars.course,pars.examnum)
+	%s'''%(pars.instructor.split()[1],pars.course,pars.examnum,myname)
 	subject='%s exam %s grading results'%(pars.course,pars.examnum)
 	mailto=instructor_email(pars.instructor)
 	CC=instructor_email('Francisco')
-	BC='dcx@ufl.edu'
+	BC=myemail
 	attaches=[filebase+'.txt',filebase+'.gra',filebase+'.ans']
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachments:%s\nSend? (yes/no) '%(mailto,CC,BC,subject,mailtext,attaches)).lower()
 	if 'yes'.startswith(confirm):
@@ -78,7 +78,7 @@ if __name__=='__main__':
 			print 'Copied %s to %s.'%(preansfile,ansfile)
 
 			# run texam on quefile
-			run_texam(quefile,mode='GRADE')
+			run_texam(quefile,pars.num_exam,mode='GRADE')
 
 			# move tex file to txt file
 			texfile=filebase+'.tex'
@@ -92,6 +92,11 @@ if __name__=='__main__':
 			with open(txtfile,'w') as ftxt: ftxt.write(txtbody)
 			print 'Modified',txtfile
 	
+			# check gra file
+			grafile=filebase+'.gra'
+			os.system('vim %s'%grafile)
+			print 'Checked',grafile
+
 	elif len(args)==3:
 		if 'email'.startswith(args[2]): grade_result_mail(filebase,pars)
 		else: raise ValueError('Cannot recognize argument "%s"'%args[2])

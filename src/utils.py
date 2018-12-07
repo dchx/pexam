@@ -2,6 +2,8 @@ import os,sys,shutil,re
 from subprocess import Popen,PIPE
 import PyPDF2 as pypdf
 path='/depot/exam/'
+myemail='dcx@ufl.edu'
+myname='Chenxing'
 
 def load_pars():
 # identify input parameter file
@@ -129,7 +131,7 @@ def make5ques(qlines):
 		for aline in answerbody.split('\n'): qlinesout.append(aline)
 	return qlinesout
 
-def run_texam(quefile,mode='none'):
+def run_texam(quefile,num_exam,mode='none'):
 	# 6: run mode; 10: number of copies; 15: space between questions
 	BasicInput='6 '+mode+'\n15 2\n'
 	if mode=='PROOF': texam_input=BasicInput+'10 1\n\n' 
@@ -141,7 +143,7 @@ def run_texam(quefile,mode='none'):
 	print 'Running texam on',quefile
 	p=Popen(['texam',quefile],stdin=PIPE,stdout=PIPE,stderr=PIPE)
 	texamout=p.communicate(texam_input)
-	if len(texamout[1])!=0: raise ValueError("texam input arguments error")
+	if len(texamout[1])!=0: raise ValueError("texam input arguments error:\n"+str(texamout))
 	else: print texamout[0]
 	for toremove in ['GTEMP.GRA','PHYSICS.FIL']:
 		if os.path.isfile(toremove):

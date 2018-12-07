@@ -1,4 +1,4 @@
-import sys,re,os
+from utils import *
 import numpy as np
 
 def print_time(num_page,time_per_page=6.9/2.):
@@ -21,7 +21,7 @@ def exam_print_mail(num_page):
 	The "main" printer in the copy room will be printing an exam in about 10 minutes. It will take about %s for it to print.\n
 	If anyone wants to use the printer please do it now. If you have something urgent coming up and you want me to hold off the printing, do let me know.\n
 	Thanks,
-	Chenxing'''%time
+	%s'''%(time,myname)
 
 	subject='Printing exam on main'
 	mailto='clas-astro@mail.ufl.edu'
@@ -50,7 +50,7 @@ def print_complete_mail(pdffile):
 	Hi all,\n
 	The printing job is completed.\n
 	Thanks,
-	Chenxing'''
+	%s'''%myname
 	subject='Re: Printing exam on main'
 	mailto='clas-astro@mail.ufl.edu'
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nSubject: %s\nContent:\n%s\nSend? (yes/no) '%(mailto,subject,mailtext)).lower()
@@ -59,18 +59,17 @@ def print_complete_mail(pdffile):
 		print 'Sent\nTo: %s\nSubject: %s\nContent:\n%s'%(mailto,subject,mailtext)
 
 	# Mail saying exam in cabinet
-	pdfinfo=get_pdf_info(pdffile) # (InstructorName, ExamName)
+	insname,examname=get_pdf_info(pdffile) # (InstructorName, ExamName)
 	mailtext='''\
 	Hi %s,\n
 	The printed %s is in the cabinet now.\n
-	Thanks,\n
-	Chenxing'''%pdfinfo
+	Thanks,
+	%s'''%(insname,examname,myname)
 	subject='Exam printed'
 	# set mailto address 
-	insname=pdfinfo[0]
 	mailto=instructor_email(insname)
 	CC=instructor_email('Francisco')
-	BC='dcx@ufl.edu'
+	BC=myemail
 	# send email
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nSend? (yes/no) '%(mailto,CC,BC,subject,mailtext)).lower()
 	if 'yes'.startswith(confirm):

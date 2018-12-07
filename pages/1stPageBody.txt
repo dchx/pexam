@@ -21,7 +21,7 @@ and may use the same exam code numbers. IT IS THEREFORE IMPORTANT THAT
 YOU MAKE SURE THAT THE SCORE YOU READ BELONGS TO YOU. The instructor's name
 and the exam number will be clearly marked on each exam score listing.
 \bigskip 
-\par As you turn in your exam, tear off this page and save it for future
+\par As you turn in your exam, {\bf tear off this page} and save it for future
 reference.  It will aid you in finding your score when the exam scores
 are posted.  Also, should you have any questions about the exam after it is
 graded, the loss of this page will make it difficult to find your exam and

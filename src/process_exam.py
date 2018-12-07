@@ -4,18 +4,18 @@ import disabled
 Program to process exams.
 '''
 
-def proof_mail(filebase,pars):
+def proof_mail(pdffile,pars):
 	''' email the grade result file to instructor'''
 	mailtext='''\
 	Hi %s,\n
 	Please check the proof for %s exam %s.\n
 	Thanks,
-	Chenxing'''%(pars.instructor.split()[1],pars.course,pars.examnum)
+	%s'''%(pars.instructor.split()[1],pars.course,pars.examnum,myname)
 	subject='%s exam %s proof'%(pars.course,pars.examnum)
 	mailto=instructor_email(pars.instructor)
 	CC=instructor_email('Francisco')
-	BC='dcx@ufl.edu'
-	attach=filebase+'.pdf'
+	BC=myemail
+	attach=pdffile
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachment:%s\nSend? (yes/no) '%(mailto,CC,BC,subject,mailtext,attach)).lower()
 	if 'yes'.startswith(confirm):
 		os.system("echo '%s' | mail -v -s '%s' -c %s -b %s -a %s %s"%(mailtext,subject,CC,BC,attach,mailto))
@@ -25,20 +25,22 @@ def modify_qfile(qfile):
 	pre-process *.q file
 	'''
 	# sed operating
-	os.system("sed -i 's/AA *(/AA S (/g' "+qfile) # insert 'S' if noappear to all questions
-	#os.system("sed -i 's/AA *S *(/AA S 1 (/g' "+qfile) # insert correct answer '1' if noappear to all questions
+	os.system("sed -i 's/AA *(/AA S (/g' "+qfile) # insert 'S' if noappear, to all questions
+	os.system("sed -i 's/AA *1 *(/AA S 1 (/g' "+qfile) # insert 'S' if noappear, to all questions
+	#os.system("sed -i 's/AA *S *(/AA S 1 (/g' "+qfile) # insert correct answer '1' if noappear, to all questions
 
 	# operating as single string
 	with open(qfile,'r') as fq: qbody=fq.read().replace('\xef\xbb\xbf','')
-	qbody=qbody.replace('\r','\n').replace('_','\\_').replace('%','\\%').replace('\t','') # \r -> \n; _ -> \_ ; % -> \%; \t -> ''
+	qbody=qbody.replace('\r','\n').replace('_','\\_').replace('$\\_','$_').replace('%','\\%').replace('\t','') # \r -> \n; _ -> \_ ; % -> \%; \t -> ''
+	qbody=qbody.replace(' S1 ',' S 1 ').replace(' 1 S ',' S 1 ') #' S1 ' -> ' S 1 '; ' 1 S '->' S 1 '
 	qbody=qbody.replace('\n',' ').replace(' QQ','\n\nQQ').replace(' AA','\nAA').replace('  ',' ') # keep all QQ/AA/(n) in one line
-	qbody=qbody.replace(' (2)','\n(2)').replace(' (3)','\n(3)').replace(' (4)','\n(4)').replace(' (5)','\n(5)')
+	qbody=qbody.replace('(1)',' (1) ').replace(' (2)','\n(2) ').replace(' (3)','\n(3) ').replace(' (4)','\n(4) ').replace(' (5)','\n(5) ')
 	qbody=re.sub('"(.*?)"',"``\\1''",qbody) # "..." -> ``...''
 	
 	# operating as list of lines
 	qlines=qbody.split('\n')
 	qlines=make5ques(qlines) # make sure one question has five answers by adding nonsense answers
-	width=80-9
+	width=70
 	for l in range(len(qlines)): qlines[l] = splitAline(qlines[l],width) # make sure lines within certain width
 	qbody='\n'.join(qlines)
 	
@@ -66,7 +68,7 @@ def makehead(headfile,pars,numq):
 	CF1=CF1+"\\hbox to \\hsize{\\hbox to 3.8in{\\sans "+pars.semester+", {\\bf "+pars.year+"} \\hfill}\n"
 	CF1=CF1+"\\hfill {\\sans Periods: {\\bf "+pars.periods+"}}}\n"
 	CF1=CF1+"\\hbox to \\hsize{\\hbox to 1.5in{\\sans "+pars.examdate+"\\hfill}\n"
-	CF1=CF1+"\\hfill {\\sans Special Code {\\bf "+pars.specialcode+"}} \\hfill\n"
+	CF1=CF1+"\\hfill {\\sans Special Code {\\bf "+specialcode+"}} \\hfill\n"
 	CF1=CF1+"\\hfill {\\sans "+pars.instructor+"}}\n"
 	
 	# 2nd page custorm field 2
@@ -98,6 +100,7 @@ def modify_texfile(texfile):
 def process_exam(checkeven=True):
 	pars=load_pars()
 	workpath, fileprefix=file_names(pars)
+	args=sys.argv
 
 	if len(args)==2:
 		quefile=workpath+fileprefix+'.que'
@@ -108,8 +111,8 @@ def process_exam(checkeven=True):
 			
 			# copy qfile to *.q
 			thisq=workpath+fileprefix+'.q' 
-			shutil.copy(qfile,thisq)
-			print 'Copied',qfile,'to',thisq
+			shutil.copy(pars.qfile,thisq)
+			print 'Copied',pars.qfile,'to',thisq
 			
 			# pre-process *.q file, calculate number of questions
 			numq=modify_qfile(thisq)
@@ -132,7 +135,7 @@ def process_exam(checkeven=True):
 			print 'Moved',qufile,'to',quefile
 
 		# run texam on *.que, output *.tex, *.ans
-		run_texam(quefile,mode=pars.mode)
+		run_texam(quefile,pars.num_exam,mode=pars.mode)
 		texfile=workpath+fileprefix+'.tex'
 		ansfile=workpath+fileprefix+'.ans'
 		
@@ -155,17 +158,11 @@ def process_exam(checkeven=True):
 		os.system('pdftex -output-directory '+workpath+' '+fileprefix+'.tex')
 		print 'Created:',pdffile
 		
-		# extract pdf for disabled students
-		outbase=workpath+pars.course+'_'+pars.section+'_'+pars.examnum
-		if pars.mode=='EXAM':
-			with open(pdffile,'rb') as fpdf:
-				pdf=pypdf.PdfFileReader(fpdf)
-				if checkeven: num_disabled_page=disabled.nPageDisabled_CheckEven(pdf,pars.num_disabled)
-				else: num_disabled_page=disabled.find_disabled_page(pdf,pars.num_disabled)
-				if num_disabled_page!=0: disabled.extract_disabled(pdf,num_disabled_page)
+		# check evenpage and extract pdf for disabled students
+		if pars.mode=='EXAM': disabled.extract_disabled(pdffile,pars,checkeven=checkeven)
 
 	elif len(args)==3:
-		if 'email'.startswith(args[2]): proof_mail(workpath+'master',pars)
+		if 'email'.startswith(args[2]): proof_mail(workpath+'master.pdf',pars)
 		else: raise ValueError('Cannot recognize argument "%s"'%args[2])
 
 if __name__ == '__main__': process_exam(checkeven=True)
