@@ -31,11 +31,15 @@ def modify_qfile(qfile):
 
 	# operating as single string
 	with open(qfile,'r') as fq: qbody=fq.read().replace('\xef\xbb\xbf','')
-	qbody=qbody.replace('\r','\n').replace('_','\\_').replace('$\\_','$_').replace('%','\\%').replace('\t','') # \r -> \n; _ -> \_ ; % -> \%; \t -> ''
+	qbody=qbody.replace('\r','\n').replace('_','\\_').replace('%','\\%').replace('\t','') # \r -> \n; _ -> \_ ; % -> \%; \t -> ''
 	qbody=qbody.replace(' S1 ',' S 1 ').replace(' 1 S ',' S 1 ') #' S1 ' -> ' S 1 '; ' 1 S '->' S 1 '
 	qbody=qbody.replace('\n',' ').replace(' QQ','\n\nQQ').replace(' AA','\nAA').replace('  ',' ') # keep all QQ/AA/(n) in one line
 	qbody=qbody.replace('(1)',' (1) ').replace(' (2)','\n(2) ').replace(' (3)','\n(3) ').replace(' (4)','\n(4) ').replace(' (5)','\n(5) ')
 	qbody=re.sub('"(.*?)"',"``\\1''",qbody) # "..." -> ``...''
+	# recover \_ -> _ in $...$ maths
+	for found in re.finditer('\$(.*?)\$',qbody):
+		tosub=found.group().replace('\\_','_')
+		qbody=qbody.replace(found.group(),tosub)
 	
 	# operating as list of lines
 	qlines=qbody.split('\n')
