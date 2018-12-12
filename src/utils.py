@@ -143,7 +143,7 @@ def run_texam(quefile,num_exam,mode='none'):
 	print 'Running texam on',quefile
 	p=Popen(['texam',quefile],stdin=PIPE,stdout=PIPE,stderr=PIPE)
 	texamout=p.communicate(texam_input)
-	if len(texamout[1])!=0: raise ValueError("texam input arguments error:\n"+str(texamout))
+	if len(texamout[1])!=0: raise ValueError("texam input arguments error:\n"+texamout[0]+texamout[1]+"\n^^^texam input arguments error.\n")
 	else: print texamout[0]
 	for toremove in ['GTEMP.GRA','PHYSICS.FIL']:
 		if os.path.isfile(toremove):
