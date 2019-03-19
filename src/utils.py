@@ -57,6 +57,8 @@ def instructor_email(InstructorName):
 	elif 'Anthony' in InstructorName: email='anthonyhg@astro.ufl.edu'
 	elif 'Rafael' in InstructorName: email='guzman@astro.ufl.edu'
 	elif 'Francisco' in InstructorName: email='freyes@astro.ufl.edu'
+	elif ('Steve' in InstructorName) or ('Stephen' in InstructorName): email='eiken@astro.ufl.edu'
+	elif 'Elizabeth' in InstructorName: email='elada@astro.ufl.edu'
 	else: raise ValueError("Instructor %s email not defined"%InstructorName)
 	return email
 
@@ -123,9 +125,17 @@ def make5ques(qlines):
 	iques=[il for il in range(len(qlines)) if 'QQ' in qlines[il].strip()] # line index of questions
 	qlinesout=[]
 	for iiques in range(len(iques)): # index of question index list
-		if iiques!=(len(iques)-1): answerbody='\n'.join(qlines[(iques[iiques]+1):iques[iiques+1]]) # the body between two questions stacked in one line
-		else: answerbody='\n'.join(qlines[(iques[iiques]+1):]) # last question
+		if iiques!=(len(iques)-1): answerslist=qlines[(iques[iiques]+1):iques[iiques+1]] # the body between two questions
+		else: answerslist=qlines[(iques[iiques]+1):] # last question
+		answerbody='\n'.join(answerslist) # answers list -> one string
 		num_answer=len(re.findall('\(\d\)',answerbody))
+		if (num_answer==1 and not '(1)' in answerbody)\
+		  or (num_answer==2 and not ('(1)' in answerbody and '(2)' in answerbody))\
+		  or (num_answer==3 and not ('(1)' in answerbody and '(2)' in answerbody and '(3)' in answerbody))\
+		  or (num_answer==4 and not ('(1)' in answerbody and '(2)' in answerbody and '(3)' in answerbody and '(4)' in answerbody))\
+		  or (num_answer==5 and not ('(1)' in answerbody and '(2)' in answerbody and '(3)' in answerbody and '(4)' in answerbody and '(5)' in answerbody)):
+			raise Exception("Question %d: answer numbers do not match."%(iiques+1))
+		elif num_answer>5: raise Exception("Question %d: more than 5 answers."%(iiques+1))
 		for iappend,num2append in enumerate(range(num_answer+1,6)): answerbody=answerbody+"\n(%d) NVA"%(num2append)
 		qlinesout.append(qlines[iques[iiques]])
 		for aline in answerbody.split('\n'): qlinesout.append(aline)

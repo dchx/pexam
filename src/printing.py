@@ -30,7 +30,7 @@ def exam_print_mail(num_page):
 		os.system("echo '%s' | mail -v -s '%s' %s"%(mailtext,subject,mailto))
 
 def lprprint(pdffile):
-	confirm=raw_input('Are you sure to print to file %s? (yes/no)'%pdffile).lower()
+	confirm=raw_input('Are you sure to print the file %s on the "main" printer? (yes/no)'%pdffile).lower()
 	if 'yes'.startswith(confirm):
 		os.system('lpr -P main -o sides=two-sided-long-edge %s'%pdffile)
 		print 'Sent print command to main to print %s.'%pdffile
