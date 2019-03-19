@@ -1,5 +1,4 @@
 from utils import *
-import numpy as np
 
 def print_time(num_page,time_per_page=6.9/2.):
 	'''

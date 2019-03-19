@@ -1,4 +1,5 @@
 import os,sys,shutil,re
+import numpy as np
 from subprocess import Popen,PIPE
 import PyPDF2 as pypdf
 path='/depot/exam/'
@@ -127,15 +128,24 @@ def make5ques(qlines):
 	for iiques in range(len(iques)): # index of question index list
 		if iiques!=(len(iques)-1): answerslist=qlines[(iques[iiques]+1):iques[iiques+1]] # the body between two questions
 		else: answerslist=qlines[(iques[iiques]+1):] # last question
+
+		# make sure no duplicated answers
+		pureanswerslist=[re.split('\(\d\)',answers)[-1].strip() for answers in answerslist]
+		if len(np.unique(pureanswerslist))!=len(pureanswerslist): raise Exception("Question %d: found same answers."%(iiques+1))
+
 		answerbody='\n'.join(answerslist) # answers list -> one string
 		num_answer=len(re.findall('\(\d\)',answerbody))
+
+		# make sure no duplicated question numbers
 		if (num_answer==1 and not '(1)' in answerbody)\
 		  or (num_answer==2 and not ('(1)' in answerbody and '(2)' in answerbody))\
 		  or (num_answer==3 and not ('(1)' in answerbody and '(2)' in answerbody and '(3)' in answerbody))\
 		  or (num_answer==4 and not ('(1)' in answerbody and '(2)' in answerbody and '(3)' in answerbody and '(4)' in answerbody))\
 		  or (num_answer==5 and not ('(1)' in answerbody and '(2)' in answerbody and '(3)' in answerbody and '(4)' in answerbody and '(5)' in answerbody)):
 			raise Exception("Question %d: answer numbers do not match."%(iiques+1))
+		# make sure no more than 5 questions
 		elif num_answer>5: raise Exception("Question %d: more than 5 answers."%(iiques+1))
+
 		for iappend,num2append in enumerate(range(num_answer+1,6)): answerbody=answerbody+"\n(%d) NVA"%(num2append)
 		qlinesout.append(qlines[iques[iiques]])
 		for aline in answerbody.split('\n'): qlinesout.append(aline)
