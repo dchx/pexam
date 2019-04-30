@@ -122,16 +122,49 @@ def make5ques(qlines):
 	'''
 	if one question doesn't have five answers, make it five by appending nonsense answers (NVA).
 	input: qlines [list of str] the readed .q file stored by line, and should be in order [QQ,AA,(2),(3),(4),...] line by line
+
+	Later added:
+	 - add/remove periods (.) at the end of answers, as often asked by prof. lada
+	 - make sure no duplicated answers
+	 - make sure no empty answers
+	 - make sure no duplicated question numbers
+	 - make sure no more than 5 questions
 	'''
 	iques=[il for il in range(len(qlines)) if 'QQ' in qlines[il].strip()] # line index of questions
 	qlinesout=[]
 	for iiques in range(len(iques)): # index of question index list
 		if iiques!=(len(iques)-1): answerslist=qlines[(iques[iiques]+1):iques[iiques+1]] # the body between two questions
 		else: answerslist=qlines[(iques[iiques]+1):] # last question
+		answerslist = [answer for answer in answerslist if len(answer.strip())>0] # clear empty answers
 
+		# handle periods (.), empty answers, duplicated answers
+		pureanswerslist=[]
+		number_of_periods=0 # conunt period (.) at end of each answer as often asked by prof. lada
+		for i,answer in enumerate(answerslist):
+			pureanswer=re.split('\(\d\)',answer)[-1].strip()
+			'''
+			# add period (.) to sentence answers as often asked by prof. lada, plan A
+			if len(pureanswer.split())>3 and pureanswer[0].isupper() and pureanswer[-1]!='.': 
+				answerslist[i] = answer.strip()+'.'
+			'''
+			# add period (.) to sentence answers as often asked by prof. lada, plan B
+			if pureanswer[-1]=='.': number_of_periods+=1 # conunt period (.) at end of each answer as often asked by prof. lada
+			
+			# in case of empty answers
+			if pureanswer == '':
+				pureanswer = 'NVA'
+				answerslist[i] = answer.strip()+' NVA'
+			pureanswerslist.append(pureanswer)
 		# make sure no duplicated answers
-		pureanswerslist=[re.split('\(\d\)',answers)[-1].strip() for answers in answerslist]
 		if len(np.unique(pureanswerslist))!=len(pureanswerslist): raise Exception("Question %d: found same answers."%(iiques+1))
+		# add period (.) to sentence answers as often asked by prof. lada, plan B
+		thequestion = qlines[iques[iiques]].strip()
+		for i,answer in enumerate(answerslist):
+			pureanswer=re.split('\(\d\)',answer)[-1].strip()
+			if number_of_periods>=3 or thequestion[-1].isalpha(): # all answers shold have a period
+				if pureanswer[-1]!='.': answerslist[i] = answer.strip()+'.'
+			else: # all answers shold NOT have period
+				if pureanswer[-1]=='.': answerslist[i] = answer.strip().strip('.')
 
 		answerbody='\n'.join(answerslist) # answers list -> one string
 		num_answer=len(re.findall('\(\d\)',answerbody))
@@ -146,6 +179,7 @@ def make5ques(qlines):
 		# make sure no more than 5 questions
 		elif num_answer>5: raise Exception("Question %d: more than 5 answers."%(iiques+1))
 
+		# if less than 5 answers, add NVA answers
 		for iappend,num2append in enumerate(range(num_answer+1,6)): answerbody=answerbody+"\n(%d) NVA"%(num2append)
 		qlinesout.append(qlines[iques[iiques]])
 		for aline in answerbody.split('\n'): qlinesout.append(aline)
