@@ -31,12 +31,13 @@ def modify_qfile(qfile):
 
 	# operating as single string
 	with open(qfile,'r') as fq: qbody=fq.read().replace('\xef\xbb\xbf','')
-	qbody=qbody.replace('\r','\n').replace('_','\\_').replace('%','\\%').replace('\t','') # \r -> \n; _ -> \_ ; % -> \%; \t -> ''; # -> \#; & -> \&
-	qbody=qbody.replace('\nA)','\n(1)').replace('\nB)','\n(2)').replace('\nC)','\n(3)').replace('\nD)','\n(4)').replace('\nE)','\n(5)').replace('#','\#').replace('&','\&') # errors from prof. lada
+	qbody=qbody.replace('\r','\n').replace('\\_','_').replace('_','\\_').replace('\t','') # \r -> \n; _ -> \_ ; \t -> ''; 
+	qbody=qbody.replace('\\%','%').replace('%','\\%').replace('\\#','#').replace('#','\\#').replace('\\&','&').replace('&','\\&') # % -> \%; # -> \#; & -> \&
 	qbody=qbody.replace(' S1 ',' S 1 ').replace(' 1 S ',' S 1 ').replace(' s1 ',' S 1 ').replace(' s 1 ',' S 1 ') #' S1 ' -> ' S 1 '; ' 1 S '->' S 1 '; ...
-	qbody=qbody.replace(' 1)','(1)').replace(' 2)','(2)').replace(' 3)','(3)').replace(' 4)','(4)').replace(' 5)','(5)')
 	qbody=qbody.replace('\n',' ').replace(' QQ','\n\nQQ').replace(' AA','\nAA').replace('  ',' ') # keep all QQ/AA/(n) in one line
-	qbody=qbody.replace('(1)',' (1) ').replace(' (2)','\n(2) ').replace(' (3)','\n(3) ').replace(' (4)','\n(4) ').replace(' (5)','\n(5) ')
+	qbody=qbody.replace('\nA)','\n(1)').replace('\nB)','\n(2)').replace('\nC)','\n(3)').replace('\nD)','\n(4)').replace('\nE)','\n(5)') # A)B)C)D)E) -> (1)(2)(3)(4)(5)
+	qbody=qbody.replace(' 1)','(1)').replace(' 2)','(2)').replace(' 3)','(3)').replace(' 4)','(4)').replace(' 5)','(5)') # 1)2)3)4)5) -> (1)(2)(3)(4)(5)
+	qbody=qbody.replace('(1)',' (1) ').replace(' (2)','\n(2) ').replace(' (3)','\n(3) ').replace(' (4)','\n(4) ').replace(' (5)','\n(5) ') # (1)(2)(3)(4)(5) add space
 	qbody=re.sub('"(.*?)"',"``\\1''",qbody) # "..." -> ``...''
 	# recover \_ -> _ in $...$ maths
 	for found in re.finditer('\$(.*?)\$',qbody):
@@ -81,7 +82,7 @@ def makehead(headfile,pars,numq):
 	CF2_2="\\centerline{Your exam consists of "+numq+" questions and begins on the next page.}\n"
 	CF2_2=CF2_2+"\\centerline{You may start as soon as you have carefully}\n" 
 	CF2_2=CF2_2+"\\centerline{read and UNDERSTOOD the above instructions.}\n"
-	CF2_2=CF2_2+"\\centerline{You have a total of "+pars.timelimit+"minutes.}\n\\hfill\n\\eject\n"
+	CF2_2=CF2_2+"\\centerline{You have a total of "+pars.timelimit+" minutes.}\n\\hfill\n\\eject\n"
 	
 	page1body=open(pars.page1,'r').read()
 	page2body=open(pars.page2,'r').read()

@@ -142,14 +142,7 @@ def make5ques(qlines):
 		number_of_periods=0 # conunt period (.) at end of each answer as often asked by prof. lada
 		for i,answer in enumerate(answerslist):
 			pureanswer=re.split('\(\d\)',answer)[-1].strip()
-			'''
-			# add period (.) to sentence answers as often asked by prof. lada, plan A
-			if len(pureanswer.split())>3 and pureanswer[0].isupper() and pureanswer[-1]!='.': 
-				answerslist[i] = answer.strip()+'.'
-			'''
-			# add period (.) to sentence answers as often asked by prof. lada, plan B
 			if pureanswer[-1]=='.': number_of_periods+=1 # conunt period (.) at end of each answer as often asked by prof. lada
-			
 			# in case of empty answers
 			if pureanswer == '':
 				pureanswer = 'NVA'
@@ -161,7 +154,9 @@ def make5ques(qlines):
 		thequestion = qlines[iques[iiques]].strip()
 		for i,answer in enumerate(answerslist):
 			pureanswer=re.split('\(\d\)',answer)[-1].strip()
-			if number_of_periods>=3 or thequestion[-1].isalpha(): # all answers shold have a period
+			if number_of_periods>=3 or thequestion[-1].isalpha() or (len(pureanswer.split())>4 and pureanswer[0].isupper() and not pureanswer.istitle()): 
+			# more than 3 answers already have periods OR the question is not finished by a sentence OR (the answer has >4 words AND first word is capital AND is not title sentence)
+				# all answers shold have a period
 				if pureanswer[-1]!='.': answerslist[i] = answer.strip()+'.'
 			else: # all answers shold NOT have period
 				if pureanswer[-1]=='.': answerslist[i] = answer.strip().strip('.')
