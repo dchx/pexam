@@ -17,8 +17,7 @@ def proof_mail(pdffile,pars):
 	BC=myemail
 	attach=pdffile
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachment:%s\nSend? (yes/no) '%(mailto,CC,BC,subject,mailtext,attach)).lower()
-	if 'yes'.startswith(confirm):
-		os.system("echo '%s' | mailx -v -s '%s' -r %s -c %s -b %s -a %s %s"%(mailtext,subject,myemail,CC,BC,attach,mailto))
+	if 'yes'.startswith(confirm): send_email(mailtext,subject,mailto, cc=CC, bcc=BC, attach=attach)
 
 def modify_qfile(qfile):
 	'''

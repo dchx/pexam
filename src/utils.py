@@ -3,9 +3,10 @@ import numpy as np
 from subprocess import Popen,PIPE
 import PyPDF2 as pypdf
 path='/depot/exam/'
-myemail='dcx@ufl.edu'
-myname='Chenxing'
-myexamfolder='dcx_scratch/'
+
+myname='Do Not Reply'
+myemail='do-not-reply@ufl.edu ('+myname+')'
+myexamfolder='MyUserName_scratch/'
 
 def load_pars():
 	'''
@@ -66,6 +67,16 @@ def instructor_email(InstructorName):
 	elif 'Elizabeth' in InstructorName: email='elada@astro.ufl.edu'
 	else: raise ValueError("Instructor %s email not defined"%InstructorName)
 	return email
+
+def send_email(mailtext, subject, mailto, mailfrom=myemail, cc='', bcc='', attach='', smtp='smtp.ufl.edu'):
+	subjectpara = ' -s "'+subject+'"'
+	mailfrompara = ' -r "'+mailfrom'"'
+	ccpara = ' -c '+cc if len(cc)>0 else ''
+	bccpara = ' -b '+bcc if len(bcc)>0 else ''
+	attachpara = ' -a '+attach if len(attach)>0 else ''
+	smtppara = ' smtp='+smtp
+	os.system('echo "%s" | env MAILRC=/dev/null%s mailx -v%s%s%s%s%s %s'%\
+	          (mailtext,smtppara,subjectpara,mailfrompara,ccpara,bccpara,attachpara,mailto))
 
 def semester_code(semester):
 	if semester=='Fall': return 'f'
