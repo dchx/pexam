@@ -2,8 +2,8 @@ import os,sys,shutil,re
 import numpy as np
 from subprocess import Popen,PIPE
 import PyPDF2 as pypdf
-path='/depot/exam/'
 
+path='/depot/exam/'
 myname='Do Not Reply'
 myemail='do-not-reply@ufl.edu ('+myname+')'
 myexamfolder='MyUserName_scratch/'
@@ -69,13 +69,21 @@ def instructor_email(InstructorName):
 	return email
 
 def send_email(mailtext, subject, mailto, mailfrom=myemail, cc='', bcc='', attach='', smtp='smtp.ufl.edu'):
+	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachments:%s\nSend? (yes/no) '%(mailto,cc,bcc,subject,mailtext,attach)).lower()
+
+	additions = [cc, bcc, attach]
+	padd = [' -c ', ' -b ', ' -a ']
+	addparas = []
+	for ia in range(len(additions)):
+		if type(additions[ia]==list): additions[ia] = padd[ia].join(additions[ia])
+		addparas.append(padd[ia]+additions[ia] if len(additions[ia])>0 else '')
+	cc, bcc, attach = additions
+	ccpara, bccpara, attachpara = addparas
 	subjectpara = ' -s "'+subject+'"'
 	mailfrompara = ' -r "'+mailfrom'"'
-	ccpara = ' -c '+cc if len(cc)>0 else ''
-	bccpara = ' -b '+bcc if len(bcc)>0 else ''
-	attachpara = ' -a '+attach if len(attach)>0 else ''
 	smtppara = ' smtp='+smtp
-	os.system('echo "%s" | env MAILRC=/dev/null%s mailx -v%s%s%s%s%s %s'%\
+
+	if 'yes'.startswith(confirm): os.system('echo "%s" | env MAILRC=/dev/null%s mailx -v%s%s%s%s%s %s'%\
 	          (mailtext,smtppara,subjectpara,mailfrompara,ccpara,bccpara,attachpara,mailto))
 
 def semester_code(semester):
