@@ -1,0 +1,744 @@
+THIS IS A PURE ASCII FILE.
+================================================================================
+
+                         UNIVERSITY OF FLORIDA
+                          ASTRONOMY DEPARTMENT 
+
+                        COMISSION FOR GOOD EXAMS
+                   SUBCOMISSION FOR SUMMER GOOD EXAMS
+
+                                MAY, 2000
+
+                        BASICS ON EXAM PROCESSING
+                             by Carlos Roman
+                               Version 1.00
+
+================================================================================
+In this text, I would like to include the basic instructions for
+the processing and grading of departamental exams. This is not intended
+to be a 100% error proof manual, and do not contains all of the
+possible situations. Is based in my style of doing things and I agree
+it may not be the best style. Please communicate with each other and
+use the notes you took when I explained this in front of the terminal as
+a complement. 
+In my experience, only a few exams of practice,
+some patience and a careful selection of file names will help to avoid 
+problems. Please feel free to write any comments or suggestion for improvements
+in a personal log and do not hesitate in asking Brent of Dr. Oliver for help. I
+will be absent for almost all summer A period, I may read email, but do not trust
+me on this. Is better to think I'm not available. I'll be here in Summer B, and
+it may be good to collect all suggestions for improvements (logs). Then, we can
+improve our software and have a better way to handle exams during the next year.
+
+Is also important that you take some time to start practicing and mastering
+the process, to be sure that you have enough paper to print exams and that
+you have a log or some way of remembering what you did and how you did it.
+
+-------------------------------------------------------------------------------
+
+                                  INDEX
+
+1.0 ORGANIZATION OF FILES
+	1.1 COMMON FILES
+2.0 RECEIVING A QUESTION FILE
+3.0 GENERATING A PROOF
+4.0 GENERATING AN EXAM
+5.0 THE BUBBLE SHEETS AND OIR
+	5.1 RECEIVING OIR FILES
+6.0 GENERATING GRADE FILES
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1.0 ORGANIZATION OF FILES
+
+         The directory /depot/exam/
+
+Is the root (main) folder in which we store and process all of the exams.
+If you still do not have a permission for writting in /depot/exam, please
+ask Brent for that permission. It is important that you DO NOT start
+to write or overwrite any files unless you have read or at least be sure
+that you understand what you are doing. For learning purposes, my first
+suggestion is that you create a scratch folder and practice there until
+you master the basic steps. DO NOT keep any files or process any exams
+in your personal account. Is not secure and filenames can be forgotten
+and lost, and could be very confusing to search for a file all over the
+departamental net in case of urgent need for help.  
+
+In /depot/exam/, all the exams are catalogued according to the semester
+and course, and also by exam number and section:
+
+Let say for example that we have to process exams for Professor Johnny P. Doe,
+who is in charge of teaching the famous course BEERS AND DINOSAURS, and
+has 320 students enrolled in two sections, 0998 and 0999. He will have
+3 middle terms and one final exam.
+
+Then, what we agreed to do is to use the nest notation:
+
+		In /depot/exam, we create a folder for the course.
+
+The code for summer will be "s" (we use "w" for spring and "f" for fall), the
+year is 2000 and we are going to use the name of the course and the nickname
+for the folder: (B)eers (A)nd (D)inosaurs. We could also use JPD for the name
+of the professor. The latter is a better idea if several professors are
+teaching the same course.
+
+So we create a folder:
+
+	> mkdir BADs00
+	         ^ ^ ^
+	         | | |_____________ Year
+	         | |_______________ Summer
+	         |_________________ Course
+
+
+and for each section and exam, we create one subfolder, inside the folder we
+just created:
+
+	> cd BADs00
+	> mkdir 0999_1
+	          ^  ^ 
+	          |  |______________ Exam Number
+	          |_________________ Section Number
+
+
+
+So we have a unique way to find the first exam of summer for Beers and Dinosaurs,
+section 0998:  /depot/exam/BADs00/0998_1/
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1.1 COMMON FILES
+
+There is another important folder in /depot/exam and is the folder named
+as /common. This folder contains the basic files the software uses to
+create a TeX version of an exam, right now I am only going to list and
+describe quickly the files, just for a reference. In the next sections we
+will know what are thay used for:
+
+		>cd /depot/exam/common
+
+		file 1 : 1stPageBody.txt
+
+		This generates the first page of the test header when using
+		the program makehead.pl. You will need to COPY (not to move)
+		this file lately.
+
+		file 2 : 2nd PageBody.txt
+
+		This generates the second page of the test header when using
+		the program makehead.pl. You will need to COPY (not to move)
+		this file lately.
+
+		file 3: deflist.tex
+
+		This contains the TeX macros we use for the TeX version of
+		an exam. Do not move this file. You will link it to your
+		test lately.
+
+		file 4: makehead.pl
+
+		This executable is a PERL program created by Dr. Oliver and
+		helps us to generate a header (2 pages) containing the 
+		instructions and information in a test. 
+
+		file 5: qq2tex.pl
+
+		This executable is another PERL program creted by Dr. Oliver
+		and helps us to create a TeX readable version of the
+		ascii question file sent by the professor.
+
+		file 6: map.ps
+
+		This is a postscript figure containing a little map that
+		students use to locate their grades in the BSSC building.
+		Do not move this file. Is already linked from the header files.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2.0 RECEIVING A QUESTION FILE
+
+Each faculty member will send you an email containing an ascii file. THe
+ascii file is the main text of an exam. The files are sent to  an
+special account called exam@astro.ufl.edu, which sends the files to the
+group. If you are not included in the exam@astro alias, or you are not sure,
+ask Brent to include you.
+
+An ASCII question file may look like this:
+
+ once you save it in /depot/exam  (the best email tool is PINE in this case)
+and visualize it with an ascii text editor  ("nedit", "pico", or "vi"; gedit or
+any windows based ascii editor are not very suitable and may lead
+to compatibility errors):
+
+
+QQ Astronomers generally use telescope because of
+AA S 1 (1) light gathering power (2) ability to magnify (3)
+ability to  make objects appear closer (4) they can see
+stars in the daytime (5) ability to make things appear
+larger
+QQ To get the sharpest view of Jupiter or Saturn we want
+ the best resolving power we can get.  We should observe
+with
+AA S 1 (1) a large telescope (2) a small telescope
+ (3) binoculars (4) the naked eye (5) any refracting
+telescope
+QQ The asteroids have orbits which
+AA S 1 (1) are mostly between Mars and Jupiter (2) very
+elongated (3) mostly not in the ecliptic plane (4) are
+similar to comets (5) are retrograde
+
+
+Each QQ means QUESTION, each AA means an answer list.
+
+After AA there is, sometimes an "S" That means that the question
+needs to be stacked, one possible answer per line in the final text. A lack
+of a S can mean two things: 1 that the professor does not need that
+question stacked or 2 that he/she forgot to put the S. IN the latter case,
+if you think it may be better to stack the answers as they are too long
+to be contained into a single line, add the S by yourself.
+
+THREE IMPORTANT THING TO LOOK FOR IN THE ASCII FILE:
+
+one) Each AA group must contains 5 (FIVE) answers, NO MORE, NO LESS. THey
+must be numbered from 1 to 5 and each number must be embraced in parenthesis
+and before and after a parenthesis there must be at least ONE space, like
+
+
+AA S 3 (1) the answer text
+^ ^ ^ ^^ ^^    
+| | | || ||__________________ space
+| | | || |___________________ right parenthesis
+| | | ||_____________________ left parenthesis
+| | | |______________________ space
+| | |________________________ space (only in first answer)
+| |__________________________ space (only in first answer)  
+|____________________________ AA only in first answer
+
+Any variations from the last format may lead to possible qq2tex.pl errors.
+
+two) the faculty member must avoid to use the TAB key to generate
+spaces in the question text. Ask them, if you must, to use ONLY
+the space bar to generate spaces in their texts. BEsides that,
+it is important that each line in the ascii file is NO LONGER than
+70 (SEVENTY) characters, otherwise, you may need a lot of extra time
+making lines shorter to make them fit in the TeX format. 
+
+
+three) Look for things like "fill the blanK" symbols like ___ because
+TeX do not read those. Change them for $\_\_\_\_\_$. Look for
+percentage "%" symbols. Change them by "\%", Other wise TeX interprets
+them as "end of line" flags.
+
+
+If the question file sent by the professor does not follow the described
+format, ask the professor to re-sent the file in the correct format.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+3.0 GENERATING A PROOF
+
+Step by step:
+
+
+step 1) Copy the file sent by the professor into the corresponding folder.
+Erase the original file from your root or mail folder.
+
+Use the following format for the filename:
+
+(In this example, we list the first exam for "Beers and Dinosaurs",
+section 0998, exam 1. "whatever.file" is the file sent by the professor
+as described in section 2.0)
+
+ 
+		>cp whatever.file /depot/exam/BADs00/0998_1/s00bad1a.q
+
+		>cd /depot/exam/BADs00/0998_1/
+
+		>ls
+
+		the machine must list one file:
+
+		>s00bad1a.q
+		 |____|^^ ^
+		    |  || |________ extension .q is used for raw ascii file
+		    |  ||__________ section 0998 identified as "a"
+		    |  |___________ exam no. 1
+		    |______________ you shoul know what this means by now
+		
+		
+		
+step 2) copy the necesary files:
+
+	GET INTO /common folder:
+
+	>cp *.dy.txt ../BADs00/0998_1/  <---copy 1st and 2nd body text files
+	>cp *.pl ../BADs00/0998_1/      <---copy PERL macros to your folder
+
+if you get into your exam folder again, you may have a list with 5 files:
+
+	>cd ../BADs00/0998_1
+	>ls
+
+	the computer spits:
+
+	> 1stPageBody.txt 	qq2tex.pl* 	s00bad1a.q
+	  2ndPageBody.txt 	makehead.pl*
+
+
+step 3) run qq2tex:
+
+	> perl qq2tex.pl
+
+	the program will ask:
+
+	>qq2tex (28FEB00 version):
+	>Enter the question file name: 
+
+	there you write of course, s00bad1a.q
+
+	and press enter.
+
+If the question file contains 10 questions and the ascii format was
+correct, you may have a message like:
+
+	> QQ: 10 AA: 10 errors: 0
+
+If it is not correct, the program will spit the locations of the possible
+format errors in the ascii (.q) file. IN that case, you will need to
+open the file in a text editor, correct the format errors and try again
+the step 3 until you have a good message.
+
+
+If you list again your files you may have a new file:
+
+		s00bad1a.qu  <<< this is your re-formatted ascii file.
+		                 notice the extension: .qu
+
+Step 4) The header. This one is easy: Run makehead.pl:
+
+	> perl makehead.pl
+
+
+	The computer will ask you, ONE BY ONE for the exam details
+
+
+	Let say that section 0998 for Beers and Dinosaurs is listed
+	in the catalog as AST9555, periods MWF5-6
+
+	Course number: AST9555
+	Section: 0998
+	Semester: Summer
+	Year: 2000
+	Periods: MWF5-6
+	Instructor: Dr. John Doe
+	Exam Date: August 32th, 2000
+	Exam Number: 1
+	Testform: A               <------ see below
+	Special Code: 09          <------ see below
+	Time limit: 50            <------ see below
+	Number of questions: 10
+
+Enter the desired header file name: s00bad1a.hed <---- see below
+
+Testform:  This is an older but useful code used to avoid confusions:
+	Exam 1 has code A, exam 2 has code B, etc., and trhere is a
+	maximum of 4 midterms (A,B,C,D) and one final (form E).
+
+Special Code:  You need an special code for each course and
+		section. In this case, section 0998 has code 09,
+		then section 0999 has code 19,and if there
+		are mores sections for a single professor, we would
+		use 29,39, etc.
+
+		The actual codes we have are as next:
+
+		Oliver: code 7 (07,17, etc)
+		Cohen: code 6 (06,16...)
+		Gottesman: code 2
+		Lebo: Code 4
+		Leacock: Code 3
+		Smith: Code 5
+
+		And it may be good to keep using the same codes, right?
+
+Time Limit: Indicates time allowed for the test IN MINUTES. Ask Dr. OLiver
+or the faculty member for allowed times during summer semester.
+
+
+NOw you have a header file named: s00bad1a.hed.
+
+OPEN YOUR .qu file WITH ANY TEXT EDITOR YOU FEEL COMFORTABLE WITH (vi, pico,nedit).
+
+You need to add 1 line AT THE BEGGINING OF THE FILE:
+
+\input s00bad1a.hed
+^
+|______Don't forget this slash symbol!
+
+
+You need to add 3 lines AT THE END OF THE FILE, after the very last
+embrace ("}") symbol:
+
+\EQ
+\vfill\eject
+\evenpages
+
+Don't forget this last step. IS CRUCIAL to have separate tests.
+
+
+Save and close your text editor. YOur file is ready to process, so give it
+a "name", which is, change its extension:
+
+
+		>mv s00bad1a.qu s00bad1a.que
+
+the .que extension means a file that you can run into TEXAM, our principal
+software.
+
+Once you have your .que file, run TEXAM:
+
+		> texam s00bad1a.que
+
+the computer will spit:
+
+
+NUMARGS=  1
+  ARG  = s00bad1a.que
+ THE QUESTION FILE CONTAINS 40 QUESTIONS
+  1 QUESTION FILE NAME                      s00bad1a.que
+  2 RAND NUMBER/ANS FILE                    s00bad1a.ans
+  3 MASTER/ STATISTICS  OUTPUT FILE         s00bad1a.tex
+  4 STUDENT ANSWER FILE                     s00bad1a.san
+  5 STUDENT GRADE FILE                      s00bad1a.gra
+  6 RUN TYPE PROOF,EXAM,GRADE               PROO
+  7 GRADE (NUMBER RIGHT, RMW/4)             NUMBER RIGHT
+  8 ALPHABATIZE BY SECTION                  NO
+  9 RAND SEEDS IX:IY                        19999:9999
+ 10 # EXAMS, NOTE # Q'S IN Q FILE IS >>>>>  1
+ 11 SINGLE OR DOUBLE SPACED                 SINGLE
+ 12 DUP RIGHT ANS IN FORM IQ:IANS:IQ:IANS
+ 13   Q WEIGHTS   IN FORM IQ:QWT:IQ:QWT
+  QUESTION WTS
+  1 1.0  2 1.0  3 1.0  4 1.0  5 1.0  6 1.0  7 1.0  8 1.0  9 1.0 10 1.0
+ 11 1.0 12 1.0 13 1.0 14 1.0 15 1.0 16 1.0 17 1.0 18 1.0 19 1.0 20 1.0
+ 21 1.0 22 1.0 23 1.0 24 1.0 25 1.0 26 1.0 27 1.0 28 1.0 29 1.0 30 1.0
+ 31 1.0 32 1.0 33 1.0 34 1.0 35 1.0 36 1.0 37 1.0 38 1.0 39 1.0 40 1.0
+  
+ 15 SPACE BETWEEN QUESTIONS                 4
+  
+  ENTER THE LINE NUMBER, CHANGE, CHANGE, TO CHANGE A LINE
+  ENTER S TO STOP
+  ENTER (CARRIAGE RETURN <CR>) IF EVERYTHING IS OK
+
+
+The numbers 1 to 15 are your options and you can change them by typing
+ 
+optionnumber newvalue   <ENTER>
+
+for example, we always prefer option 15, space between questions as 2, so
+we say
+
+15 2  
+
+don't forget to press enter!
+
+For the proof, leave everything as it is, except maybe for this option.
+
+Press enter again to go out from TEXAM.
+
+You may have a bunch of new files. Don't worry about that:
+
+The files you like now are:
+
+s00bad1a.tex
+s00bad1a.ans
+
+the proof is contains the master exam, with all the correct answers
+as marked by the professor (normally 1 is the correct answer). Clone
+the files mentioned to a master copy:
+
+		>cp s00bad1a.tex master.tex
+		>cp s00bad1a.ans master.ans
+
+OPEN THE master.tex file with your favorite text editor and include the
+next line as the FIRST LINE:
+
+
+\input /depot/exam/common/deflist.tex
+
+
+save and close.
+
+Now you can run TeX to generate the proof.
+
+		> tex master.tex
+
+
+In an ideal case, tex will throw a few lines of garbage and leave your
+prompt clean. I don't know how to consider here all of the possible errors
+from TeX. It could be millions, or just one. Lost? The best, is to ASK. ASK
+Brent, or another TeX literate student. The most common errors are too long
+lines or ___ fill the blanks symbols or % percentage signs without
+a format. See last paragraphs of section 2.0.
+
+
+Visualize your proof:
+
+		> xdvi master.dvi
+
+If everything is nice and smooth, you will see a viewer with a nice
+exam, 2 header pages and at the top, a number 0. Check the text of
+the header for possible typos in the section, group, date, etcetera. Look
+at the text for possible black squares or funny things that you may
+correct at the .que file (do not correct the tex file because that one
+is overwritten everytime you run texam).
+
+Print a hardcopy of the final proof after corrections:
+
+		> dvips master.dvi
+
+(if you say "dvips master.dvi -o", the proof is copied to a postscript
+file first)
+
+Print a hardcopy of the master answers file
+
+		> lpr master.ans
+
+Staple all. Take the proof/master to the faculty member's mailbox. Do this
+at least two days in advance, the professor may sent more corrections.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+4.0 GENERATING AN EXAM
+
+It would be foolish to repeat here step by step all the text from section 3.0.
+
+To generate an exam, once you corrected your s00bad1a.que file with the
+corrections suggested by the faculty after they read the proof:
+
+run texam on s00bad1a.que . REMEMBER. Make in this file the corrections
+from the faculty: master.que is just the master and you may generate is
+again, if necesary, as a clone of w00bad1a.que.
+
+
+change the options 6 (instead of proof, say "exam"), 10 (put here, instead
+of 1, the number of exams the professor told you to generate) and 15
+(space between questions is 2, not 4).
+
+get out from TEXAM by pressing enter again.
+
+add a first line to s00bad1a.tex:
+
+\input /depot/exam/common/deflist.tex
+
+
+save and close.
+
+run TeX on this file
+
+		> tex s00bad1a.tex
+
+no errors? Good. visualize your exam:
+
+		> xdvi s00bad1a.dvi
+
+the dvi visualizer should show you the exam itself with as many copies
+as you told texam to generate. The test number is at the top of each page.
+Check that
+
+		a) the second page is blank
+		b) the number of pages for each test is EVEN.
+
+
+quit the dvi window. You are ready to print th exam. Be sure that you
+are plenty of paper, staples and at least 1 minute of time for each 30
+pages generated. And extra time for stapling! The first time you do this,
+you may generate the ps copy and print from a ghostview visualizer.
+
+Be sure that the file
+
+S00bad1a.ans
+
+is safe and that it contains the correct answers for the
+"n" exams you generated. 
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+5.0 The bubble sheets and OIR.
+
+
+Once you printed, STAPLED, collated, proctored, recollected and have a bunch
+of test scantron bubble sheets with the student's answers. Put them inside
+a blank sheet of paper (like a taco), put it together with a rubber band and
+take it to the ground floor of the turlington Hall. 
+
+There are several personal working at the OIR office. They are normally
+in not a very good mood. Please try to be clear to avoid
+confusions. They are going to ask you for the next data:
+
+
+Name: Give them your LAST name
+
+Department: Astronomy 
+
+Telephone: give them your office phone number
+
+Course : Say AST 1002
+
+User ID: MSCXAM
+
+filename: Use same notation: say "s00bad1a"
+
+
+In 45 minutes, more or less, you will be able to retrieve a file
+called S00BAD1A.OIR from the OIR computer. Here are the instructions
+to get the file:
+
+
+5.1 RECEIVING OIR FILES
+
+
+in a terminal, type
+
+		> x3270 &
+
+to get a 3270 type terminal. Is black. With the mouse go to the
+connect option and select "other".
+
+It will open a small window asking for a computer name:
+
+write          nervm.nerdc.ufl.edu
+
+press enter and then the terminal will take you to a system where
+you will be asked for name and password:
+
+		name: mscxam
+		password: regina
+
+once you are in, type
+
+begin    <press enter>
+rl       <press enter>
+
+
+and you will see a list of files printed in green. Get the file(s) you
+need by moving up or down the list with the arrow keys of your keyboard
+and selecting the file with the F9 key. Once you got all you need, press
+F3 to quit.
+
+type    logoff
+
+and with  yur mouse, select file and the option "exit".
+The terminal will disappear.
+
+Now the files are in anothjer computer in an ftp site. 
+
+FIRST, go to the folder WHER YOU WANT TO PUT THE FILES, maybe /depot/exam
+so you can move them to the corrsponding folders later.
+
+		> cd /depot/exam
+		> ftp nervm.nerdc.ufl.edu
+
+		type mscxam and regina as name and password respectively
+
+		> ascii
+		> mget S00BAD1A.OIR     (or whatever file you need)
+		> quit
+
+
+You now may have the .OIR file in your account.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+6.0 GENERATING GRADE FILES.
+
+Step 1) Copy the OIR file you got from nervm.nerdc.ufl.edu (see section 5.1)
+        to the corresponding folder and put it the extension .san
+
+		> cp s00BAD1A.OIR /depot/exam/BADs00/0998_1/s00bad1a.san
+
+the .san (or .OIR) file you have contains all of the information from the
+green bubble sheets. 
+
+Step 2) Clone the .que and the .ans files from step 4.0.
+        I use the same names, just without the "s00":
+
+		> cp s00bad1a.que bad1a.que
+		> cp s00bad1a.ans bad1a.ans
+		> cp s00bad1a.san bad1a.san
+
+This is important. The .ans file will be overwritten and your only copy
+will be the original w00bad1a.ans.
+
+
+Run TEXAM on bad1a.que. As you already generated bad1a.san and bad1a.ans
+the only optins you may change are 
+
+15 (2 spaces),
+10 (again, PUT HERE THE NUMBER OF EXAMS YOU GENERATED ORIGINALLY, AND NOT,
+           I REPEAT, NOT THE NUMBER OF EXAMS YOU GRADED)
+
+6 grade (instead of exam or proof, now it is grade, REMEMBER. Grade.
+        one more time!: grade)
+
+Are you sure you said "grade" and not "exam" or "proof"? Good. Double check
+again that you put the correct number of exams and that you said
+grade and not proof or exam. OK. As we said in Mexico "after advise there
+is not lying".
+
+
+Press enter to generate the grades.
+
+edit the newly generated
+
+bad1a.tex
+
+
+cut all of the garbage, which is the exam text again. At the end of that,
+you will find all of the statistics for the grading, including, the
+names, the correct answers, the answers from each student for each questions,
+reliabilities, scores, etc. Check that everything looks fine. WARNING,
+this is not a TeX file, even if it has a .tex extension.
+
+
+save the cut version of bad1a.tex.
+
+you have also another .ans file, but it contains now, a plot
+of the grade distribution. And there is a .gra file. Those are the raw
+grades ans that is the file you may be asked to post. Maybe you need to
+print this file and fold or cut the paper to avoid posting names or SSN's.
+
+Using PINE or your favorite mailtool, send to the professor those
+three files:
+
+bad1a.tex
+bad1a.gra
+bad1a.ans
+
+
+
+ Guess what, you are done.
+ 
+ 
+ 
+ After everything is happy again, etcetera. AND AFTER YOU DON'T NEED
+ ANY MORE CORRECTIONS, erase from the
+ folder the next list of files:
+ 
+ 
+ -all of the files from the /common folder. We don't need that many copies
+ -all of the .dvi, .log. and even the .tex files (you can generate those
+ from the .que 
+ -all of the ps files you may generated. 
+ 
+ Is important to erase non-necesary files because /depot is shared
+ with other departamental sotfware and the space is thus, somewhat limited.
+ THe normal load of space is left after erases is around 70-250 Kb per
+ exam depending on the size of the .que files.
+ 
+ 
+ HAVE FUN
+ HAVE A NICE SUMMER...
+

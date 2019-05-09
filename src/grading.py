@@ -16,7 +16,7 @@ def grade_result_mail(filebase,pars):
 	attaches=[filebase+'.txt',filebase+'.gra',filebase+'.ans']
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachments:%s\nSend? (yes/no) '%(mailto,CC,BC,subject,mailtext,attaches)).lower()
 	if 'yes'.startswith(confirm):
-		os.system("echo '%s' | mail -v -s '%s' -c %s -b %s -a %s %s"%(mailtext,subject,CC,BC,' -a '.join(attaches),mailto))
+		os.system("echo '%s' | mailx -v -s '%s' -r %s -c %s -b %s -a %s %s"%(mailtext,subject,myemail,CC,BC,' -a '.join(attaches),mailto))
 
 def glob_one_file(toglob):
 	# get *.dsa file

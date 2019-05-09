@@ -5,11 +5,15 @@ import PyPDF2 as pypdf
 path='/depot/exam/'
 myemail='dcx@ufl.edu'
 myname='Chenxing'
+myexamfolder='dcx_scratch/'
 
 def load_pars():
-# identify input parameter file
+	'''
+	Load input parameters
+	'''
+	# identify input parameter file
 	args=sys.argv
-	defaultinfile=path+"dcx_scratch/pars/input.py"
+	defaultinfile=path+myexamfolder+"pars/input.py"
 	if len(args)==1:
 		infile=raw_input("Please enter input parameter file (Default: "+defaultinfile+"): ")
 		if len(infile)==0: infile=defaultinfile
@@ -120,7 +124,7 @@ def splitAline(line,width):
 
 def make5ques(qlines):
 	'''
-	if one question doesn't have five answers, make it five by appending nonsense answers (NVA).
+	If one question doesn't have five answers, make it five by appending nonsense answers (NVA).
 	input: qlines [list of str] the readed .q file stored by line, and should be in order [QQ,AA,(2),(3),(4),...] line by line
 
 	Later added:

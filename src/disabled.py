@@ -97,7 +97,7 @@ def email_drc(pars):
 	attach=disabledpdffile
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachment:%s\nSend? (yes/no) '%(mailto,CCs,BC,subject,mailtext,attach)).lower()
 	if 'yes'.startswith(confirm):
-		os.system("echo '%s' | mail -v -s '%s' -c %s -b %s -a %s %s"%(mailtext,subject,' -c '.join(CCs),BC,attach,mailto))
+		os.system("echo '%s' | mailx -v -s '%s' -r %s -c %s -b %s -a %s %s"%(mailtext,subject,myemail,' -c '.join(CCs),BC,attach,mailto))
 
 if __name__=='__main__':
 	# email the exam to drc

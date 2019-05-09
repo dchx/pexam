@@ -18,7 +18,7 @@ def proof_mail(pdffile,pars):
 	attach=pdffile
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachment:%s\nSend? (yes/no) '%(mailto,CC,BC,subject,mailtext,attach)).lower()
 	if 'yes'.startswith(confirm):
-		os.system("echo '%s' | mail -v -s '%s' -c %s -b %s -a %s %s"%(mailtext,subject,CC,BC,attach,mailto))
+		os.system("echo '%s' | mailx -v -s '%s' -r %s -c %s -b %s -a %s %s"%(mailtext,subject,myemail,CC,BC,attach,mailto))
 
 def modify_qfile(qfile):
 	'''
@@ -100,7 +100,7 @@ def modify_qufile(qufile,headfile):
 def modify_texfile(texfile):
 	# modify .tex file add first line
 	with open(texfile,'r') as ftex: texbody=ftex.read()
-	texbody='\\input /depot/exam/common/deflist.tex\n\\input /depot/exam/dcx_scratch/pages/pdftexconfig.tex\n'+texbody
+	texbody='\\input '+path+myexamfolder+'pages/deflist.tex\n\\input '+path+myexamfolder+'pages/pdftexconfig.tex\n'+texbody
 	with open(texfile,'w') as ftex: ftex.write(texbody)
 	print 'Modified:',texfile
 
@@ -125,7 +125,7 @@ def process_exam(checkeven=True):
 			numq=modify_qfile(thisq)
 			
 			# run qq2tex.pl, input *.q and create *.qu
-			qq2tex=path+'dcx_scratch/src/qq2tex.pl'
+			qq2tex=path+myexamfolder+'src/qq2tex.pl'
 			print 'Running',qq2tex,'on',thisq
 			os.system('perl '+qq2tex+' '+thisq)
 			qufile=workpath+fileprefix+'.qu'

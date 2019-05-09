@@ -26,7 +26,7 @@ def exam_print_mail(num_page):
 	mailto='clas-astro@mail.ufl.edu'
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nSubject: %s\nContent:\n%s\nSend? (yes/no) '%(mailto,subject,mailtext)).lower()
 	if 'yes'.startswith(confirm):
-		os.system("echo '%s' | mail -v -s '%s' %s"%(mailtext,subject,mailto))
+		os.system("echo '%s' | mailx -v -s '%s' -r %s %s"%(mailtext,subject,myemail,mailto))
 
 def lprprint(pdffile):
 	confirm=raw_input('Are you sure to print the file %s on the "main" printer? (yes/no)'%pdffile).lower()
@@ -54,7 +54,7 @@ def print_complete_mail(pdffile):
 	mailto='clas-astro@mail.ufl.edu'
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nSubject: %s\nContent:\n%s\nSend? (yes/no) '%(mailto,subject,mailtext)).lower()
 	if 'yes'.startswith(confirm):
-		os.system("echo '%s' | mail -v -s '%s' %s"%(mailtext,subject,mailto))
+		os.system("echo '%s' | mailx -v -s '%s' -r %s %s"%(mailtext,subject,myemail,mailto))
 		print 'Sent\nTo: %s\nSubject: %s\nContent:\n%s'%(mailto,subject,mailtext)
 
 	# Mail saying exam in cabinet
@@ -72,7 +72,7 @@ def print_complete_mail(pdffile):
 	# send email
 	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nSend? (yes/no) '%(mailto,CC,BC,subject,mailtext)).lower()
 	if 'yes'.startswith(confirm):
-		os.system("echo '%s' | mail -v -s '%s' -c %s -b %s %s"%(mailtext,subject,CC,BC,mailto))
+		os.system("echo '%s' | mailx -v -s '%s' -r %s -c %s -b %s %s"%(mailtext,subject,myemail,CC,BC,mailto))
 
 if __name__=='__main__':
 	readme='''Usage:
