@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from utils import *
 import glob
 
@@ -45,20 +46,20 @@ if __name__=='__main__':
 			# unzip downloaded zip file
 			zipfile=zipfiles[0]
 			unzipcmd='unzip '+workpath+'*.zip -d '+workpath
-			os.system(unzipcmd); print unzipcmd
+			os.system(unzipcmd); print(unzipcmd)
 			rmzipcmd='rm '+workpath+'*.zip'	
-			os.system(rmzipcmd); print rmzipcmd
+			os.system(rmzipcmd); print(rmzipcmd)
 
 			# get dsa file
 			dsafile=glob_one_file(dsa_toglob)
 
 			# copy dsa file to san file
 			shutil.copy(dsafile,sanfile)
-			print 'Copied %s to %s.'%(dsafile,sanfile)
+			print('Copied %s to %s.'%(dsafile,sanfile))
 
 			# check san file
 			os.system('vim %s'%sanfile)
-			print 'Checked',sanfile
+			print('Checked '+sanfile)
 
 		# have checked san file, do grading
 		else: # no zip file found (zip file removed)
@@ -67,13 +68,13 @@ if __name__=='__main__':
 			prequefile=workpath+fileprefix+'.que'
 			quefile=filebase+'.que'
 			shutil.copy(prequefile,quefile)
-			print 'Copied %s to %s.'%(prequefile,quefile)
+			print('Copied %s to %s.'%(prequefile,quefile))
 
 			# copy ans file
 			preansfile=workpath+fileprefix+'.ans'
 			ansfile=filebase+'.ans'
 			shutil.copy(preansfile,ansfile)
-			print 'Copied %s to %s.'%(preansfile,ansfile)
+			print('Copied %s to %s.'%(preansfile,ansfile))
 
 			# run texam on quefile
 			run_texam(quefile,pars.num_exam,mode='GRADE')
@@ -82,18 +83,18 @@ if __name__=='__main__':
 			texfile=filebase+'.tex'
 			txtfile=filebase+'.txt'
 			os.rename(texfile,txtfile)
-			print 'Moved %s to %s.'%(texfile,txtfile)
+			print('Moved %s to %s.'%(texfile,txtfile))
 
 			# modify txtfile, remove tex content
 			with open(txtfile,'r') as ftxt: txtbody = ftxt.read()
 			txtbody = txtbody[txtbody.find('1REC'):]
 			with open(txtfile,'w') as ftxt: ftxt.write(txtbody)
-			print 'Modified',txtfile
+			print('Modified '+txtfile)
 	
 			# check gra file
 			grafile=filebase+'.gra'
 			os.system('vim %s'%grafile)
-			print 'Checked',grafile
+			print('Checked '+grafile)
 
 	elif len(args)==3:
 		if 'email'.startswith(args[2]): grade_result_mail(filebase,pars)

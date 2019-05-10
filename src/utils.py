@@ -3,10 +3,12 @@ import numpy as np
 from subprocess import Popen,PIPE
 import PyPDF2 as pypdf
 
-path='/depot/exam/'
-myname='Do Not Reply'
-myemail='do-not-reply@ufl.edu ('+myname+')'
-myexamfolder='MyUserName_scratch/'
+allpath   = '/depot/exam/' # the path where all exams are processed
+pexampath = allpath + 'common/pexam/' # the path where pexam is
+myname    = 'Exam Processing Team'
+myemail   = 'exam@astro.ufl.edu'
+
+get_input = input if sys.version_info[0]==3 else raw_input
 
 def load_pars():
 	'''
@@ -14,16 +16,20 @@ def load_pars():
 	'''
 	# identify input parameter file
 	args=sys.argv
-	defaultinfile=path+myexamfolder+"pars/input.py"
+	defaultinfile=pexampath+"pars/input.py"
 	if len(args)==1:
-		infile=raw_input("Please enter input parameter file (Default: "+defaultinfile+"): ")
+		infile=get_input("Please enter input parameter file (Default: "+defaultinfile+"): ")
 		if len(infile)==0: infile=defaultinfile
 	elif len(args)==2 or len(args)==3: infile=args[1]
 	else: raise ValueError("Too many input arguments.")
 	
 	# load input parameters
 	class pars:
-		execfile(infile)
+		if sys.version_info[0]==3:
+			with open(infile, 'rb') as fin:
+				exec(compile(fin.read(), infile, 'exec'))
+		else:
+			execfile(infile)
 		mode=mode.upper()
 		num_disabled=int(num_disabled)
 	return pars
@@ -68,23 +74,26 @@ def instructor_email(InstructorName):
 	else: raise ValueError("Instructor %s email not defined"%InstructorName)
 	return email
 
-def send_email(mailtext, subject, mailto, mailfrom=myemail, cc='', bcc='', attach='', smtp='smtp.ufl.edu'):
-	confirm=raw_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachments:%s\nSend? (yes/no) '%(mailto,cc,bcc,subject,mailtext,attach)).lower()
+def send_email(mailtext, subject, mailto, mailfrom=myemail+' ('+myname+')', cc='', bcc='', attach='', smtp='smtp.ufl.edu'):
+	confirm=get_input('Are you sure to send an email\nTo: %s\nCC: %s\nBC: %s\nSubject: %s\nContent:\n%s\nAttachments:%s\nSend? (yes/no) '%(mailto,cc,bcc,subject,mailtext,attach)).lower()
 
 	additions = [cc, bcc, attach]
 	padd = [' -c ', ' -b ', ' -a ']
 	addparas = []
 	for ia in range(len(additions)):
-		if type(additions[ia]==list): additions[ia] = padd[ia].join(additions[ia])
+		if type(additions[ia])==list: additions[ia] = padd[ia].join(additions[ia])
 		addparas.append(padd[ia]+additions[ia] if len(additions[ia])>0 else '')
 	cc, bcc, attach = additions
 	ccpara, bccpara, attachpara = addparas
 	subjectpara = ' -s "'+subject+'"'
-	mailfrompara = ' -r "'+mailfrom'"'
+	mailfrompara = ' -r "'+mailfrom+'"'
 	smtppara = ' smtp='+smtp
 
-	if 'yes'.startswith(confirm): os.system('echo "%s" | env MAILRC=/dev/null%s mailx -v%s%s%s%s%s %s'%\
-	          (mailtext,smtppara,subjectpara,mailfrompara,ccpara,bccpara,attachpara,mailto))
+	if 'yes'.startswith(confirm):
+		command = 'echo "%s" | env MAILRC=/dev/null%s mailx -v%s%s%s%s%s %s'%\
+		          (mailtext,smtppara,subjectpara,mailfrompara,ccpara,bccpara,attachpara,mailto)
+		print(command)
+		os.system(command)
 
 def semester_code(semester):
 	if semester=='Fall': return 'f'
@@ -110,15 +119,16 @@ def file_names(pars):
 	
 	# first folder
 	folder1=initials.upper()+semyear+'/'
-	if not os.path.isdir(path+folder1):
-		os.mkdir(path+folder1) # instructor and semester year
-		print 'Folder created:',path+folder1
+	tocreate = allpath+folder1
+	if not os.path.isdir(tocreate):
+		os.mkdir(tocreate) # instructor and semester year
+		print('Folder created: '+tocreate)
 	# second folder
 	folder2=pars.section+'_'+pars.examnum+'/'
-	workpath=path+folder1+folder2
+	workpath = allpath+folder1+folder2
 	if not os.path.isdir(workpath):
 		os.mkdir(workpath) # sectrion and exam
-		print 'Folder created:',workpath
+		print('Folder created: '+workpath)
 	# file prefix
 	fileprefix=semyear+initials.lower()+pars.examnum+pars.testform.lower()
 	return workpath, fileprefix
@@ -210,14 +220,17 @@ def run_texam(quefile,num_exam,mode='none'):
 	elif mode=='EXAM': texam_input=BasicInput+'10 '+num_exam+'\n\n'
 	elif mode=='GRADE': texam_input=BasicInput+'10 '+num_exam+'\n\n'
 	else: raise ValueError("texam mode not recognized.")
+	texam_input = texam_input.encode('utf-8')
 	
 	# run texam on *.que, output *.tex, *.ans
-	print 'Running texam on',quefile
+	print('Running texam on '+quefile)
 	p=Popen(['texam',quefile],stdin=PIPE,stdout=PIPE,stderr=PIPE)
 	texamout=p.communicate(texam_input)
-	if len(texamout[1])!=0: raise ValueError("texam input arguments error:\n"+texamout[0]+texamout[1]+"\n^^^texam input arguments error.\n")
-	else: print texamout[0]
+	if len(texamout[1])!=0: raise ValueError("texam input arguments error:\n"+texamout[0].decode('utf-8')\
+	                                         +texamout[1].decode('utf-8')+"\n^^^texam input arguments error.\n")
+	else: print(texamout[0].decode('utf-8'))
 	for toremove in ['GTEMP.GRA','PHYSICS.FIL']:
 		if os.path.isfile(toremove):
 			os.remove(toremove)
-			print 'Removed:',toremove
+			print('Removed: '+toremove)
+

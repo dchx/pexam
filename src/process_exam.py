@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from utils import *
 import disabled
 '''
@@ -54,7 +55,7 @@ def modify_qfile(qfile):
 	numq=str(numq)
 
 	with open(qfile,'w') as fq: fq.write(qbody)
-	print 'Modified:',qfile
+	print('Modified: '+qfile)
 	return numq
 	
 def makehead(headfile,pars,numq):
@@ -86,21 +87,21 @@ def makehead(headfile,pars,numq):
 	page2body=open(pars.page2,'r').read()
 	outhead=CF1+page1body+CF1+page2body+CF2_2
 	with open(headfile,'w') as fhead: fhead.write(outhead)
-	print 'Created:',headfile
+	print('Created: '+headfile)
 
 def modify_qufile(qufile,headfile):
 	'''modify qu file add first and last lines'''
 	with open(qufile,'r') as fqu: qubody=fqu.read()
 	qubody='\\input '+headfile+'\n'+qubody+'\\EQ\n\\vfill\\eject\n\\evenpages\n\n' # make sure a blank line after \evenpages, or \evenpages can't work
 	with open(qufile,'w') as fqu: fqu.write(qubody)
-	print 'Modified:',qufile
+	print('Modified: '+qufile)
 
 def modify_texfile(texfile):
 	# modify .tex file add first line
 	with open(texfile,'r') as ftex: texbody=ftex.read()
-	texbody='\\input '+path+myexamfolder+'pages/deflist.tex\n\\input '+path+myexamfolder+'pages/pdftexconfig.tex\n'+texbody
+	texbody='\\input '+pexampath+'pages/deflist.tex\n\\input '+pexampath+'pages/pdftexconfig.tex\n'+texbody
 	with open(texfile,'w') as ftex: ftex.write(texbody)
-	print 'Modified:',texfile
+	print('Modified: '+texfile)
 
 def process_exam(checkeven=True):
 	pars=load_pars()
@@ -112,22 +113,22 @@ def process_exam(checkeven=True):
 		if pars.mode=='PROOF' or (pars.mode=='EXAM' and not os.path.isfile(quefile)):
 			# clear work folder
 			os.system('rm -rf '+workpath+'*') 
-			print 'Cleared folder:',workpath
+			print('Cleared folder: '+workpath)
 			
 			# copy qfile to *.q
 			thisq=workpath+fileprefix+'.q' 
 			shutil.copy(pars.qfile,thisq)
-			print 'Copied',pars.qfile,'to',thisq
+			print('Copied '+pars.qfile+' to '+thisq)
 			
 			# pre-process *.q file, calculate number of questions
 			numq=modify_qfile(thisq)
 			
 			# run qq2tex.pl, input *.q and create *.qu
-			qq2tex=path+myexamfolder+'src/qq2tex.pl'
-			print 'Running',qq2tex,'on',thisq
+			qq2tex=pexampath+'src/qq2tex.pl'
+			print('Running '+qq2tex+' on '+thisq)
 			os.system('perl '+qq2tex+' '+thisq)
 			qufile=workpath+fileprefix+'.qu'
-			print 'Created:',qufile
+			print('Created: '+qufile)
 
 			# create *.hed file
 			headfile=workpath+fileprefix+'.hed'
@@ -137,7 +138,7 @@ def process_exam(checkeven=True):
 			
 			# move *.qu to *.que
 			os.rename(qufile,quefile)
-			print 'Moved',qufile,'to',quefile
+			print('Moved '+qufile+' to '+quefile)
 
 		# run texam on *.que, output *.tex, *.ans
 		run_texam(quefile,pars.num_exam,mode=pars.mode)
@@ -148,10 +149,10 @@ def process_exam(checkeven=True):
 		if pars.mode=='PROOF':
 			mastertex=workpath+'master.tex'
 			shutil.copy(texfile,mastertex)
-			print 'Copied',texfile,'to',mastertex
+			print('Copied '+texfile+' to '+mastertex)
 			texfile=mastertex
 			shutil.copy(ansfile,workpath+'master.ans')
-			print 'Copied',ansfile,'to',workpath+' master.ans'
+			print('Copied '+ansfile+' to '+workpath+' master.ans')
 			fileprefix='master'
 		
 		# modify .tex file add first line
@@ -159,9 +160,9 @@ def process_exam(checkeven=True):
 		
 		# create pdf file
 		pdffile=workpath+fileprefix+'.pdf'
-		print 'Running pdftex on',texfile
+		print('Running pdftex on '+texfile)
 		os.system('pdftex -output-directory '+workpath+' '+fileprefix+'.tex')
-		print 'Created:',pdffile
+		print('Created: '+pdffile)
 		
 		# check evenpage and extract pdf for disabled students
 		if pars.mode=='EXAM': disabled.extract_disabled(pdffile,pars,checkeven=checkeven)

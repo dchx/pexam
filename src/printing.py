@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from utils import *
 
 def print_time(num_page,time_per_page=6.9/2.):
@@ -27,10 +28,12 @@ def exam_print_mail(num_page):
 	send_email(mailtext,subject,mailto)
 
 def lprprint(pdffile):
-	confirm=raw_input('Are you sure to print the file %s on the "main" printer? (yes/no)'%pdffile).lower()
+	confirm=get_input('Are you sure to print the file %s on the "main" printer? (yes/no)'%pdffile).lower()
 	if 'yes'.startswith(confirm):
-		os.system('lpr -P main -o sides=two-sided-long-edge %s'%pdffile)
-		print 'Sent print command to main to print %s.'%pdffile
+		command = 'lpr -P main -o sides=two-sided-long-edge %s'%pdffile
+		print(command)
+		os.system(command)
+		print('Sent print command to main to print %s.'%pdffile)
 
 def get_pdf_info(pdffile):
 	page1=pypdf.PdfFileReader(pdffile).getPage(0).extractText()

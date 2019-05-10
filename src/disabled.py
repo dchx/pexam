@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from utils import *
 
 def nPageDisabled_CheckEven(PdfFileReader,num_disabled):
@@ -7,7 +8,7 @@ def nPageDisabled_CheckEven(PdfFileReader,num_disabled):
 	num_page=PdfFileReader.getNumPages()
 	num_exam_passed=0.
 	num_page_thisexam=0
-	print 'Checking each exam as even-paged...'
+	print('Checking each exam as even-paged...')
 	for ipage in range(num_page):
 		pagebody=PdfFileReader.getPage(ipage).extractText()
 		if 'DEPARTMENTOFASTRONOMY\nUNIVERSITYOFFLORIDA' in pagebody:
@@ -19,10 +20,10 @@ def nPageDisabled_CheckEven(PdfFileReader,num_disabled):
 			else: num_page_thisexam+=1
 		else:
 			num_page_thisexam+=1
-	print 'Done.'
-	print 'There are',num_exam_passed,'exams.'
-	print 'In average',float(num_page)/num_exam_passed,'pages per exam.'
-	print 'There are',num_disabled_page,'pages for disabled.'
+	print('Done.')
+	print('There are '+str(num_exam_passed)+' exams.')
+	print('In average '+str(float(num_page)/num_exam_passed)+' pages per exam.')
+	print('There are '+str(num_disabled_page)+' pages for disabled.')
 	return num_page,num_disabled_page
 
 def find_disabled_page(PdfFileReader,num_disabled):
@@ -64,13 +65,13 @@ def extract_disabled(pdffile,pars,checkeven=False):
 			dwriter=pypdf.PdfFileWriter()
 			for idis in range(num_disabled_page): dwriter.addPage(pdf.getPage(idis))
 			with open(disabledpdffile,'wb') as fdisabled: dwriter.write(fdisabled)
-			print 'Created:',disabledpdffile
+			print('Created: '+disabledpdffile)
 
 			# create exam for normal students
 			nwriter=pypdf.PdfFileWriter()
 			for inorm in range(num_disabled_page,num_page): nwriter.addPage(pdf.getPage(inorm))
 			with open(normpdffile,'wb') as fnorm: nwriter.write(fnorm)
-			print 'Created:',normpdffile
+			print('Created: '+normpdffile)
 			num_norm_page=num_page-num_disabled_page
 
 def email_drc(pars):
